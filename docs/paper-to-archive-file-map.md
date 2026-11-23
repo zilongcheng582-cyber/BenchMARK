@@ -134,3 +134,7 @@ The master index confirms the four operation data files that underlie the case I
 - `beyondatoms/datasets/beyondatoms/re-anchoring_dataset.json`
 - `beyondatoms/datasets/beyondatoms/substitution_dataset.json`
 
+## GitHub repository discovery
+
+The connected GitHub account's repository listing contains `zilongcheng582-cyber/BenchMARK` but no separately named ACL27, BeyondAtoms, CARVE, benchmark-audit, strategy-exclusion, or paper-consolidation research repository. A public repository search result, `zzz-go-up/acl27`, is unrelated: its README identifies it as the official `acl-style-files` template repository. Therefore no user research-code repository has been identified through the connected GitHub account. This does not rule out code stored on the remote cloud instance or an unconnected account.
+
