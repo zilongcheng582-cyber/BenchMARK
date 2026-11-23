@@ -8,7 +8,7 @@ This map was assembled from the supplied `E:\main.tex` and `E:\ACL2027_ARCHIVE_G
 |---|---|---|
 | `E:\main.tex` | Found, 53,747 bytes | ACL-compatible paper source; includes the main claims and appendix. |
 | `E:\references.bib` | Found, 10,503 bytes | The bibliography explicitly loaded by `\bibliography{references}`. |
-| `E:\main.pdf` | Found, 242,657 bytes | Rendered copy corresponding to the supplied source; also named by the archive guide. |
+| `E:\main.pdf` | Found, 242,657 bytes | Rendered paper PDF; also named by the archive guide. |
 
 `main.tex` has no `\input`, `\include`, or `\includegraphics` dependencies. Its only explicit external TeX dependency is `references.bib` (besides the ACL style and LaTeX packages supplied by the build environment).
 
@@ -16,15 +16,15 @@ This map was assembled from the supplied `E:\main.tex` and `E:\ACL2027_ARCHIVE_G
 
 | Package ZIP | Named files to retrieve | Manuscript sections / claims supported |
 |---|---|---|
-| `beyondatoms_lr_recovered.zip` | `RESEARCH_NOTE.md`; `predictions_per_sample_precomputed.csv` | Historical Claim-only LR exploratory baselines. The guide warns these predictions use an Evidence-grouping protocol and are not the current `main.pdf` pooled-LR/CARVE comparison. Keep separate from the later `original_shortcut_audit` OOF files. |
+| `beyondatoms_lr_recovered.zip` | `beyondatoms_lr_recovered/RESEARCH_NOTE.md`; `beyondatoms_lr_recovered/predictions_per_sample_precomputed.csv` | Historical Claim-only LR exploratory baselines. The guide warns these predictions use an Evidence-grouping protocol and are not the current `main.pdf` pooled-LR/CARVE comparison. Keep separate from the later `original_shortcut_audit` OOF files. |
 | `ba_dataset_first_audit.zip` | `DATASET_FIRST_THEORY_AUDIT.md`; `pair_stats.json` | Four operation construction, text features, fixed evidence pairing, and theory correspondence. Relates to §RQ1 and appendix deduplication/pair units. |
-| `GRACE_AUDIT.zip` | `02_GRACE_TRAIN_TEST_RESULTS.md`; `results/judge_predictions.csv`; `results/predictions.csv.gz` | Cross-task evidence cited in Related Work and the study-level synthesis. Preserve the distinction between official test predictions, auxiliary NLI masking, and step-only TF-IDF. |
-| `VITAMINC_AUDIT.zip` | `03_NATIVE_CONTRASTIVE_RESULTS.md`; `results/neural_rectangles.csv`; `results/pairs.csv.gz`; `results/rectangles.csv.gz`; `results/rows.csv.gz` | Contrastive evidence-reliance comparison discussed in Related Work and exploratory appendix. `neural_rectangles.csv` defines the common 128-group frozen-prediction comparison. |
-| `VITAMINC_RESIDUAL_AUDIT.zip` | `03_ALBERT_RESIDUAL_ANALYSIS.md`; `results/predictions.csv.gz`; `results/quartet_success.csv.gz`; `results/sample_success.csv` | Residual and strategy-selection evidence; distinguishes full 11,127 quartets from common 128 groups. |
-| `ACL2027_RESEARCH_SYNTHESIS.zip` | `EXECUTIVE_SUMMARY_ZH.md`; `03_CLAIM_LEVEL_NOVELTY_MATRIX.md` | Cross-task synthesis, literature novelty, and paper framing. Check against the final strategy decision before carrying over claims. |
-| `ACL2027_CONSTRUCTION_AUDIT.zip` | `results/construction_profiles.json`; `04_STRUCTURAL_IDENTIFIABILITY.md` | Construction profiles, one-sided oracle, graph certificate, concentration, and cross-task assumptions. |
-| `ACL2027_INTERACTION_AUDIT.zip` | `03_VITAMINC_CONFOUNDER_ROBUSTNESS.md`; `results/interaction_bootstrap.csv`; `results/beyondatoms_pair_cells.csv`; `manifest.json` | Main interaction comparisons, within-family intervals, common support, and ablation claims. |
-| `ACL2027_STRATEGY_SELECTION_AUDIT.zip` | `EXECUTIVE_SUMMARY_ZH.md`; `08_ACL_FINDINGS_DECISION.md`; `results/02_ALL_STRATEGIES_CONSTRUCTION_MATRIX.csv`; `results/strategy_pair_reversals.csv`; `results/weight_diagnostics.csv`; `results/covariate_balance.csv`; `results/vitaminc_residual_trace.csv`; `results/coverage_curves.csv`; `results/reference_sensitivity.csv` | Final selected estimands, pair reversals, overlap weighting, residual accounting, and current Findings go/no-go. Read this package first when reconciling earlier conclusions. |
+| `GRACE_AUDIT.zip` | `grace_audit/manifest.json`; `grace_audit/02_GRACE_TRAIN_TEST_RESULTS.md`; `grace_audit/results/judge_predictions.csv`; `grace_audit/results/predictions.csv.gz` | Cross-task evidence cited in Related Work and the study-level synthesis. Preserve the distinction between official test predictions, auxiliary NLI masking, and step-only TF-IDF. |
+| `VITAMINC_AUDIT.zip` | `vitaminc_audit/manifest.json`; `vitaminc_audit/03_NATIVE_CONTRASTIVE_RESULTS.md`; `vitaminc_audit/results/neural_rectangles.csv`; `vitaminc_audit/results/pairs.csv.gz`; `vitaminc_audit/results/rectangles.csv.gz`; `vitaminc_audit/results/rows.csv.gz`; `vitaminc_audit/results/albert_predictions.csv.gz`; `vitaminc_audit/results/linear_predictions.csv.gz`; `vitaminc_audit/results/nli_predictions.csv.gz`; `vitaminc_audit/results/real_transfer_predictions.csv.gz`; `vitaminc_audit/results/synthetic_transfer_predictions.csv.gz` | Contrastive evidence-reliance comparison discussed in Related Work and exploratory appendix. `neural_rectangles.csv` defines the common 128-group frozen-prediction comparison. |
+| `VITAMINC_RESIDUAL_AUDIT.zip` | `residual_audit/manifest.json`; `residual_audit/03_ALBERT_RESIDUAL_ANALYSIS.md`; `residual_audit/results/predictions.csv.gz`; `residual_audit/results/quartet_success.csv.gz`; `residual_audit/results/sample_success.csv` | Residual and strategy-selection evidence; distinguishes full 11,127 quartets from common 128 groups. |
+| `ACL2027_RESEARCH_SYNTHESIS.zip` | `acl_synthesis/EXECUTIVE_SUMMARY_ZH.md`; `acl_synthesis/03_CLAIM_LEVEL_NOVELTY_MATRIX.md` | Cross-task synthesis, literature novelty, and paper framing. Check against the final strategy decision before carrying over claims. |
+| `ACL2027_CONSTRUCTION_AUDIT.zip` | `construction_audit/EXECUTIVE_SUMMARY_ZH.md`; `construction_audit/04_STRUCTURAL_IDENTIFIABILITY.md`; `construction_audit/07_RESEARCH_DIRECTION_COMPARISON.md`; `construction_audit/results/construction_profiles.json`; `construction_audit/results/structural_rows.csv.gz`; `construction_audit/results/input_manifest.json`; `construction_audit/results/behavior_replay/audit.json`; `construction_audit/results/behavior_replay/common_metrics.csv`; `construction_audit/results/behavior_replay/input_hashes.json` | Construction profiles, one-sided oracle, graph certificate, concentration, behavior replay, and cross-task assumptions. |
+| `ACL2027_INTERACTION_AUDIT.zip` | `interaction_audit/manifest.json`; `interaction_audit/EXECUTIVE_SUMMARY_ZH.md`; `interaction_audit/03_VITAMINC_CONFOUNDER_ROBUSTNESS.md`; `interaction_audit/results/interaction_bootstrap.csv`; `interaction_audit/results/beyondatoms_pair_cells.csv` | Main interaction comparisons, within-family intervals, common support, and ablation claims. |
+| `ACL2027_STRATEGY_SELECTION_AUDIT.zip` | `selection_audit/EXECUTIVE_SUMMARY_ZH.md`; `selection_audit/08_ACL_FINDINGS_DECISION.md`; `selection_audit/replay_interaction.py`; `selection_audit/results/input_manifest.json`; `selection_audit/results/02_ALL_STRATEGIES_CONSTRUCTION_MATRIX.csv`; `selection_audit/results/strategy_pair_reversals.csv`; `selection_audit/results/previous_interaction_bootstrap.csv`; `selection_audit/results/weight_diagnostics.csv`; `selection_audit/results/covariate_balance.csv`; `selection_audit/results/vitaminc_residual_trace.csv`; `selection_audit/results/coverage_curves.csv`; `selection_audit/results/reference_sensitivity.csv` | Final selected estimands, pair reversals, overlap weighting, residual accounting, and current Findings go/no-go. Read this package first when reconciling earlier conclusions. |
 
 ## Exact rows/cases named in `main.tex`
 
@@ -45,7 +45,21 @@ The guide identifies these as the authoritative route to an exhaustive inventory
 - `FILE_INDEX.csv`: archive member path, package, and purpose.
 - `SHA256SUMS.txt`: package/data/source/document fingerprints.
 - `REPO_VERSIONS.json`: fixed upstream repositories, commits, and URLs.
-- `main.pdf`: manuscript copy in the archive.
+- `E:\main.pdf`: local manuscript PDF, 242,657 bytes; the guide also lists `main.pdf` in the master archive.
+
+The extracted master index has 371 data rows and columns `容器`, `相对路径`, `用途`, `字节数`. The named entry-file rows above were checked against this index. The case IDs themselves do not appear in indexed member paths, and the index has no member named `casebook` or `intervention`. The exact saved Stage A roster, patch specification, replay output, and source excerpt for `re-anchoring_140` / `re-anchoring_265` are not yet located; those need to be identified by reading the relevant audit specification/report files one at a time.
+
+## Current BeyondAtoms primary paired-result files
+
+These are on the remote working tree, outside the nine ZIP packages. They are the primary files for the current `main.tex` CARVE versus pooled-LR comparison, and must not be confused with the earlier LR ZIP's evidence-grouped exploratory predictions:
+
+- `/root/data/beyondatoms-carve/experiments/audit/carve_predictions.csv`
+- `/root/data/beyondatoms-carve/experiments/audit/metrics_recomputed.json`
+- `/root/data/beyondatoms-carve/experiments/original_shortcut_audit/ALIGNED_SAMPLES.csv`
+- `/root/data/beyondatoms-carve/experiments/original_shortcut_audit/OOF_PREDICTIONS.csv`
+- `/root/data/beyondatoms-carve/experiments/original_shortcut_audit/audit_summary.json`
+
+The working tree's `experiments/original_shortcut_audit` is the source for `pooled_strict_lr` in the current draft; the archive's `beyondatoms_lr_recovered/predictions_per_sample_precomputed.csv` is a separate protocol and estimand.
 
 The supplied guide names nine packages. No additional archive members are inferred beyond the listed names. The exact internal paths, hashes, and all casebook filenames remain unverified until the index is retrieved.
 
