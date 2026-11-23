@@ -66,7 +66,7 @@ The guide identifies these as the authoritative route to an exhaustive inventory
 
 The master archive is `/root/ACL2027_COMPLETE_RESEARCH_ARCHIVE.zip` on the remote instance (143,020,087 bytes; uploaded 2026-11-23 20:22 local server time).
 
-The extracted master index has 371 data rows and columns `容器`, `相对路径`, `用途`, `字节数`. Most named entries above were checked against this index; `selection_audit/01_INPUT_AND_PREDICTION_AUDIT.md` and `interaction_audit/01_ARCHIVE_AND_PREDICTION_ALIGNMENT.md` were confirmed by direct reads from their nested ZIPs even though the index does not list them. The case IDs themselves do not appear in indexed member paths, and no path matched `casebook` or `intervention`. The saved Stage A roster, patch specification, replay output, and source excerpt for `re-anchoring_140` / `re-anchoring_265` remain unlocated. The remote shell used to inspect the master archive has exited, so these four items cannot currently be checked further without renewed access to the archive.
+The extracted master index has 371 data rows and columns `容器`, `相对路径`, `用途`, `字节数`. Most named entries above were checked against this index; `selection_audit/01_INPUT_AND_PREDICTION_AUDIT.md` and `interaction_audit/01_ARCHIVE_AND_PREDICTION_ALIGNMENT.md` were confirmed by direct reads from their nested ZIPs even though the index does not list them. The case IDs themselves do not appear in indexed member paths, and no path matched `casebook` or `intervention`. The Stage A materials were subsequently located in the remote working tree at `experiments/module_causal_audit/stage_a/`; they are outside the master ZIP index, which explains why the earlier archive-only lookup missed them.
 
 ## Current BeyondAtoms primary paired-result files
 
@@ -79,6 +79,53 @@ These are on the remote working tree, outside the nine ZIP packages. They are th
 - `/root/data/beyondatoms-carve/experiments/original_shortcut_audit/audit_summary.json`
 
 The working tree's `experiments/original_shortcut_audit` is the source for `pooled_strict_lr` in the current draft; the archive's `beyondatoms_lr_recovered/predictions_per_sample_precomputed.csv` is a separate protocol and estimand. The strategy-selection input audit explicitly says the archived bundle lacks same-version per-example pooled-LR predictions aligned to current CARVE. Thus the working-tree files above, rather than that ZIP, are required to substantiate the current paired table; their provenance must stay separate from the earlier archive rows.
+
+## Main-text experiment artifact map
+
+Scope: this section follows the experiments reported in the body of `E:\main.tex`. Per the user's instruction, the Appendix evidence-edited pilot (64 groups) and held-out set (119 groups) are not included here.
+
+### RQ1 — grouped claim-only predictability
+
+The five-fold, dependency-grouped OOF protocol and the two estimands (operation-specific and pooled) map to these remote working-tree files:
+
+- `/root/data/beyondatoms-carve/experiments/original_shortcut_audit/FROZEN_MODEL_SETTINGS.json` — saved model and fold settings.
+- `/root/data/beyondatoms-carve/experiments/original_shortcut_audit/CLAIM_ONLY_GROUPED_BASELINES.csv` — operation-specific and pooled aggregate results used by Table 1.
+- `/root/data/beyondatoms-carve/experiments/original_shortcut_audit/OOF_PREDICTIONS.csv` — row-level OOF predictions.
+- `/root/data/beyondatoms-carve/experiments/original_shortcut_audit/audit_summary.json` — audit summary and diagnostics.
+- `/root/data/beyondatoms-carve/experiments/original_shortcut_audit/pooled_shortcut_audit.py.b64` — saved analysis script, stored base64-encoded.
+
+### RQ2 — CARVE predictions and paired comparison
+
+- `/root/data/beyondatoms-carve/experiments/audit/carve_predictions.csv` — frozen CARVE predictions on the 1,550-record benchmark.
+- `/root/data/beyondatoms-carve/experiments/audit/metrics_recomputed.json` — recomputed standalone metrics for Table 2.
+- `/root/data/beyondatoms-carve/experiments/audit/error_intersection.json` — saved joint-error summary.
+- `/root/data/beyondatoms-carve/experiments/original_shortcut_audit/CARVE_LR_ALIGNED_PREDICTIONS.csv` — record-aligned CARVE/pooled-LR predictions supporting Table 3.
+- `/root/data/beyondatoms-carve/experiments/original_shortcut_audit/ALIGNED_SAMPLES.csv` — aligned analysis rows.
+- `/root/data/beyondatoms-carve/experiments/original_shortcut_audit/JOINT_PAIR_ACCURACY.csv` — original-pair joint accuracy reported in the Appendix.
+
+The historical LR ZIP remains a different evidence-grouping estimand and is not a substitute for the aligned file above.
+
+### RQ3 — selected Stage A interventions
+
+The Stage A assets are in `/root/data/beyondatoms-carve/experiments/module_causal_audit/stage_a/`. The roster metadata names `frozen_stage_a_cases.jsonl` and gives SHA-256 `94af955786aae3991246a07c2164a15787dbfcc9e8b3701ccee0c9190f69f21b`; the file exists at that path, is 33,090 bytes, and its computed SHA-256 matches. In the roster, `source_id` maps `re-anchoring_140` to `stage_a_05` and `re-anchoring_265` to `stage_a_08`.
+
+- `frozen_stage_a_cases.jsonl` and `frozen_stage_a_cases.meta.json` — frozen 16-case roster, case IDs, and roster hash.
+- `PATCH_EXPERIMENT_MATRIX.csv` — six-condition case-level outcome matrix used for the Appendix Stage A table and the selected body examples.
+- `build_patch_specs.log` — patch specification/build log; the two target rows identify the evidence-endpoint patch for `stage_a_05` and the match `direction` edit for `stage_a_08`, alongside wrong-value controls.
+- `compare_patch_runs.log` — saved patch-run comparison output.
+- `structured_replay_cpu.log` and `structured_replay_cpu.py` — CPU baseline replay output and its script.
+- `STAGE_A_CASE_STUDIES.md` — case-level claim/evidence excerpts and narratives; this is where the manuscript's omitted verbatim source excerpt for case 140 can be checked.
+- `SEMANTIC_CHECK_265_140.md` — focused semantic/control audit for the two body cases.
+- `CARVE_MODULE_CAUSAL_AUDIT_STAGE_A.md` — Stage A report; it points to the matrix, logs, source checks, and validation scripts.
+- `SOURCE_CODE_HOOK_MAP.md`, `replay_harness.py`, and `run_gpu_validation.sh`, `run_gpu_validation2.sh`, `run_gpu_validation3.sh` — intervention hook map, replay implementation, and saved GPU-validation command scripts. These are historical artifacts; no inference was run during this file audit.
+
+### Negative audits in the body
+
+**B0 temporal-rule audit** (`/root/data/beyondatoms-carve/experiments/module_causal_audit/stage_b0/`): `B0_TEMPORAL_HYPOTHESIS.md`, `B0_TEMPORAL_CANDIDATES.csv`, `b0_semantic_assessment.json`, `CPU_RULE_REPLAY.csv`, `B0_summary.json`, and `STEP5_INPUT_RECONSTRUCTION.csv` are the audit specification, candidate funnel, saved analyst assessments, rule replay, summary, and reconstructed verifier inputs. The corresponding code entry points include `b0_screen.py` and `b0_finalize.py.b64`.
+
+**B0.5 cross-system source screen** (`/root/data/beyondatoms-carve/experiments/module_causal_audit/stage_b05/`): `CROSS_SYSTEM_COMPARABILITY.md` records the no-go/design-only outcome; `P3_SOURCE_SNAPSHOT.json`, `sources/`, and `b05_sources.tar.xz` preserve source provenance; `VERIFICATION.json` and `FROZEN_PROTOCOL.json` capture the audit checks and protocol. This is source-level screening, not behavioral replication.
+
+**Repair-bypass eligibility** (also in `stage_b05`): `P3_SAFETY_ELIGIBILITY.md`, `P3_ELIGIBILITY_TASKS.csv`, and `P3_COUNTS.json` correspond to the saved-state task inventory and the 0/64 negative, 3/28 positive eligibility counts in the body. This is an eligibility audit, not a safety evaluation or a new inference run.
 
 ## Official BeyondAtoms code snapshot
 
@@ -98,7 +145,7 @@ The master ZIP includes the fixed BeyondAtoms source snapshot. The exact paths b
 
 The manuscript's `direction` field maps to `ClaimDrivenVerification`'s `detect_direction` helper. The helper compares lexical overlap for left-to-left/right-to-right endpoints against left-to-right/right-to-left endpoints, then returns `same`, `reversed`, or `unknown`; it does not inspect the connective. The audit's source-level explanation is therefore tied to this exact helper in `helpers.py`.
 
-The Stage A roster, patch specification, intervention replay output, and original source-excerpt file are still not located. The roster hash prefix quoted in `main.tex` (`94af9557…f21b`) has no matching entry in `SHA256SUMS.txt`; the indexed construction `behavior_replay/audit.json` also contains none of the named case IDs. The underlying dataset records and linked evidence IDs are located above, but they do not recover the intervention edit values or replay configuration. Further checks are pending because the existing SSH console exited; no replacement connection was opened.
+The Stage A materials are outside `SHA256SUMS.txt` and the master archive's indexed construction `behavior_replay/audit.json`; they were verified directly in the live remote working tree instead. The roster hash now matches the manuscript's `94af9557…f21b` prefix. The Stage A evidence and replay assets listed above were read individually; no new GPU inference was run.
 
 All nine package names from the guide were confirmed as entries in the master index. The exact paths shown in the table were matched to index rows. The following SHA-256 values were read from the single `SHA256SUMS.txt` member:
 
