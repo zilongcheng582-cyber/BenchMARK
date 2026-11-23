@@ -1,6 +1,6 @@
 # Paper-to-archive file map
 
-This map was assembled from the supplied `E:\main.tex`, `E:\references.bib`, `E:\main.pdf`, and `E:\ACL2027_ARCHIVE_GUIDE_ZH.docx`, then checked against named entries in the master archive's `FILE_INDEX.csv`. It identifies the concrete archive packages and files that correspond to the manuscript. `SHA256SUMS.txt` has not been checked, and the 371-row index has not been exhaustively reconciled, so this is a research-file map rather than a complete package inventory.
+This map was assembled from the supplied `E:\main.tex`, `E:\references.bib`, `E:\main.pdf`, and `E:\ACL2027_ARCHIVE_GUIDE_ZH.docx`, then checked against named entries in the master archive's `FILE_INDEX.csv` and `SHA256SUMS.txt`. It identifies the concrete archive packages and files that correspond to the manuscript. The 371-row index has not been exhaustively reconciled, so this is a research-file map rather than a complete package inventory.
 
 ## Manuscript source files
 
@@ -40,6 +40,21 @@ The manuscript names these case IDs; the exact case-level evidence rows and inte
 
 These are case IDs, not literal filesystem paths. The four operation datasets below are located, but the index does not identify which member stores the saved intervention roster, patch values, replay outputs, or source excerpts.
 
+| Case ID | Exact dataset member | Record label | Linked evidence record |
+|---|---|---|---|
+| `re-anchoring_140` | `beyondatoms/datasets/beyondatoms/re-anchoring_dataset.json` | support | `re-anchoring_evidence_70` |
+| `re-anchoring_215` | same Re-anchoring dataset | not_support | `re-anchoring_evidence_107` |
+| `re-anchoring_262` | same Re-anchoring dataset | support | `re-anchoring_evidence_131` |
+| `re-anchoring_264` | same Re-anchoring dataset | support | `re-anchoring_evidence_132` |
+| `re-anchoring_265` | same Re-anchoring dataset | not_support | `re-anchoring_evidence_132` |
+| `re-anchoring_267` | same Re-anchoring dataset | not_support | `re-anchoring_evidence_133` |
+| `re-anchoring_336` | same Re-anchoring dataset | support | `re-anchoring_evidence_168` |
+| `substitution_209` | `beyondatoms/datasets/beyondatoms/substitution_dataset.json` | not_support | `substitution_evidence_104` |
+| `substitution_225` | same Substitution dataset | not_support | `substitution_evidence_112` |
+| `substitution_260` | same Substitution dataset | support | `substitution_evidence_130` |
+| `omission_155` | `beyondatoms/datasets/beyondatoms/omission_dataset.json` | not_support | `omission_evidence_75` |
+| `omission_254` | same Omission dataset | support | `omission_evidence_121` |
+
 ## Master-archive locator files
 
 The guide identifies these as the authoritative route to an exhaustive inventory and reproducibility metadata:
@@ -49,7 +64,9 @@ The guide identifies these as the authoritative route to an exhaustive inventory
 - `REPO_VERSIONS.json`: fixed upstream repositories, commits, and URLs.
 - `E:\main.pdf`: local manuscript PDF, 242,657 bytes; the guide also lists `main.pdf` in the master archive.
 
-The extracted master index has 371 data rows and columns `容器`, `相对路径`, `用途`, `字节数`. Most named entries above were checked against this index; `selection_audit/01_INPUT_AND_PREDICTION_AUDIT.md` and `interaction_audit/01_ARCHIVE_AND_PREDICTION_ALIGNMENT.md` were confirmed by direct reads from their nested ZIPs even though the index does not list them. The case IDs themselves do not appear in indexed member paths, and no path matched `casebook` or `intervention`. The exact saved Stage A roster, patch specification, replay output, and source excerpt for `re-anchoring_140` / `re-anchoring_265` are not yet located; those need to be identified by reading the relevant audit specification/report files one at a time.
+The master archive is `/root/ACL2027_COMPLETE_RESEARCH_ARCHIVE.zip` on the remote instance (143,020,087 bytes; uploaded 2026-11-23 20:22 local server time).
+
+The extracted master index has 371 data rows and columns `容器`, `相对路径`, `用途`, `字节数`. Most named entries above were checked against this index; `selection_audit/01_INPUT_AND_PREDICTION_AUDIT.md` and `interaction_audit/01_ARCHIVE_AND_PREDICTION_ALIGNMENT.md` were confirmed by direct reads from their nested ZIPs even though the index does not list them. The case IDs themselves do not appear in indexed member paths, and no path matched `casebook` or `intervention`. The saved Stage A roster, patch specification, replay output, and source excerpt for `re-anchoring_140` / `re-anchoring_265` remain unlocated. The remote shell used to inspect the master archive has exited, so these four items cannot currently be checked further without renewed access to the archive.
 
 ## Current BeyondAtoms primary paired-result files
 
@@ -65,15 +82,23 @@ The working tree's `experiments/original_shortcut_audit` is the source for `pool
 
 ## Official BeyondAtoms code snapshot
 
-The master ZIP includes the fixed BeyondAtoms source snapshot. These exact source files were located and read individually:
+The master ZIP includes the fixed BeyondAtoms source snapshot. The exact paths below were located; the component wrapper, verifier, direction helper, default template, and relevant method/import sections were read directly:
 
 - `beyondatoms/scripts/run_carve.py` — CLI entry point; imports `Executor` from `pipeline`.
+- `beyondatoms/templates/golden_carve.yaml` — 3,413-byte default template; configures `ClaimDrivenVerification`.
 - `beyondatoms/pipeline.py` — defines `Executor` and imports the implementation modules below.
+- `beyondatoms/modules/claim_driven_verification.py` — seven-line compatibility wrapper; imports the actual verifier.
+- `beyondatoms/modules/claim_driven/verification.py` — actual verifier; `_match_claim_rel_to_pool` is around line 488.
+- `beyondatoms/modules/claim_driven/helpers.py` — defines `detect_direction`.
+- `beyondatoms/modules/claim_driven/normalizer.py` — `TextNormalizer` imported by the wrapper.
+- `beyondatoms/modules/claim_driven/prompts.py` — relation and repair prompt definitions imported by the verifier.
 - `beyondatoms/modules/relation_extraction.py` — relation extraction and connective family/symmetry/inverse utilities.
 - `beyondatoms/modules/verification.py` — downstream source/claim verification module.
 - `beyondatoms/util/util.py` — shared utility dependency imported by the CLI and pipeline.
 
-The manuscript's specific claim about the `direction` field in a match record is not mapped to one of these source files yet. The queried `relation_extraction.py` contains connective handling but does not define that field. The matching implementation and Stage A patch/replay files remain an open file-location item.
+The manuscript's `direction` field maps to `ClaimDrivenVerification`'s `detect_direction` helper. The helper compares lexical overlap for left-to-left/right-to-right endpoints against left-to-right/right-to-left endpoints, then returns `same`, `reversed`, or `unknown`; it does not inspect the connective. The audit's source-level explanation is therefore tied to this exact helper in `helpers.py`.
+
+The Stage A roster, patch specification, intervention replay output, and original source-excerpt file are still not located. The roster hash prefix quoted in `main.tex` (`94af9557…f21b`) has no matching entry in `SHA256SUMS.txt`; the indexed construction `behavior_replay/audit.json` also contains none of the named case IDs. The underlying dataset records and linked evidence IDs are located above, but they do not recover the intervention edit values or replay configuration. Further checks are pending because the existing SSH console exited; no replacement connection was opened.
 
 All nine package names from the guide were confirmed as entries in the master index. The exact paths shown in the table were matched to index rows. The following SHA-256 values were read from the single `SHA256SUMS.txt` member:
 
