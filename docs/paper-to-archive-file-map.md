@@ -23,8 +23,8 @@ This map was assembled from the supplied `E:\main.tex`, `E:\references.bib`, `E:
 | `VITAMINC_RESIDUAL_AUDIT.zip` | `residual_audit/manifest.json`; `residual_audit/03_ALBERT_RESIDUAL_ANALYSIS.md`; `residual_audit/results/predictions.csv.gz`; `residual_audit/results/quartet_success.csv.gz`; `residual_audit/results/sample_success.csv` | Residual and strategy-selection evidence; distinguishes full 11,127 quartets from common 128 groups. |
 | `ACL2027_RESEARCH_SYNTHESIS.zip` | `acl_synthesis/EXECUTIVE_SUMMARY_ZH.md`; `acl_synthesis/03_CLAIM_LEVEL_NOVELTY_MATRIX.md` | Cross-task synthesis, literature novelty, and paper framing. Check against the final strategy decision before carrying over claims. |
 | `ACL2027_CONSTRUCTION_AUDIT.zip` | `construction_audit/EXECUTIVE_SUMMARY_ZH.md`; `construction_audit/04_STRUCTURAL_IDENTIFIABILITY.md`; `construction_audit/07_RESEARCH_DIRECTION_COMPARISON.md`; `construction_audit/results/construction_profiles.json`; `construction_audit/results/structural_rows.csv.gz`; `construction_audit/results/input_manifest.json`; `construction_audit/results/behavior_replay/audit.json`; `construction_audit/results/behavior_replay/common_metrics.csv`; `construction_audit/results/behavior_replay/input_hashes.json` | Construction profiles, one-sided oracle, graph certificate, concentration, behavior replay, and cross-task assumptions. |
-| `ACL2027_INTERACTION_AUDIT.zip` | `interaction_audit/manifest.json`; `interaction_audit/EXECUTIVE_SUMMARY_ZH.md`; `interaction_audit/03_VITAMINC_CONFOUNDER_ROBUSTNESS.md`; `interaction_audit/results/interaction_bootstrap.csv`; `interaction_audit/results/beyondatoms_pair_cells.csv` | Main interaction comparisons, within-family intervals, common support, and ablation claims. |
-| `ACL2027_STRATEGY_SELECTION_AUDIT.zip` | `selection_audit/EXECUTIVE_SUMMARY_ZH.md`; `selection_audit/08_ACL_FINDINGS_DECISION.md`; `selection_audit/replay_interaction.py`; `selection_audit/results/input_manifest.json`; `selection_audit/results/02_ALL_STRATEGIES_CONSTRUCTION_MATRIX.csv`; `selection_audit/results/strategy_pair_reversals.csv`; `selection_audit/results/previous_interaction_bootstrap.csv`; `selection_audit/results/weight_diagnostics.csv`; `selection_audit/results/covariate_balance.csv`; `selection_audit/results/vitaminc_residual_trace.csv`; `selection_audit/results/coverage_curves.csv`; `selection_audit/results/reference_sensitivity.csv` | Final selected estimands, pair reversals, overlap weighting, residual accounting, and current Findings go/no-go. Read this package first when reconciling earlier conclusions. |
+| `ACL2027_INTERACTION_AUDIT.zip` | `interaction_audit/01_ARCHIVE_AND_PREDICTION_ALIGNMENT.md`; `interaction_audit/manifest.json`; `interaction_audit/EXECUTIVE_SUMMARY_ZH.md`; `interaction_audit/03_VITAMINC_CONFOUNDER_ROBUSTNESS.md`; `interaction_audit/results/interaction_bootstrap.csv`; `interaction_audit/results/beyondatoms_pair_cells.csv`; `interaction_audit/results/unified_accuracy.csv.gz` (3,583,889 bytes) | Main interaction comparisons, within-family intervals, common support, ablation claims, and unified frozen predictions. |
+| `ACL2027_STRATEGY_SELECTION_AUDIT.zip` | `selection_audit/01_INPUT_AND_PREDICTION_AUDIT.md`; `selection_audit/README.md`; `selection_audit/EXECUTIVE_SUMMARY_ZH.md`; `selection_audit/08_ACL_FINDINGS_DECISION.md`; `selection_audit/replay_interaction.py`; `selection_audit/results/input_manifest.json`; `selection_audit/results/strategy_catalog.csv`; `selection_audit/results/02_ALL_STRATEGIES_CONSTRUCTION_MATRIX.csv`; `selection_audit/results/strategy_pair_reversals.csv`; `selection_audit/results/previous_interaction_bootstrap.csv`; `selection_audit/results/weight_diagnostics.csv`; `selection_audit/results/covariate_balance.csv`; `selection_audit/results/vitaminc_residual_trace.csv`; `selection_audit/results/coverage_curves.csv`; `selection_audit/results/reference_sensitivity.csv` | Final selected estimands, pair reversals, overlap weighting, residual accounting, and current Findings go/no-go. Read this package first when reconciling earlier conclusions. |
 
 ## Exact rows/cases named in `main.tex`
 
@@ -47,7 +47,7 @@ The guide identifies these as the authoritative route to an exhaustive inventory
 - `REPO_VERSIONS.json`: fixed upstream repositories, commits, and URLs.
 - `E:\main.pdf`: local manuscript PDF, 242,657 bytes; the guide also lists `main.pdf` in the master archive.
 
-The extracted master index has 371 data rows and columns `容器`, `相对路径`, `用途`, `字节数`. The named entry-file rows above were checked against this index. The case IDs themselves do not appear in indexed member paths, and the index has no member named `casebook` or `intervention`. The exact saved Stage A roster, patch specification, replay output, and source excerpt for `re-anchoring_140` / `re-anchoring_265` are not yet located; those need to be identified by reading the relevant audit specification/report files one at a time.
+The extracted master index has 371 data rows and columns `容器`, `相对路径`, `用途`, `字节数`. Most named entries above were checked against this index; `selection_audit/01_INPUT_AND_PREDICTION_AUDIT.md` and `interaction_audit/01_ARCHIVE_AND_PREDICTION_ALIGNMENT.md` were confirmed by direct reads from their nested ZIPs even though the index does not list them. The case IDs themselves do not appear in indexed member paths, and no path matched `casebook` or `intervention`. The exact saved Stage A roster, patch specification, replay output, and source excerpt for `re-anchoring_140` / `re-anchoring_265` are not yet located; those need to be identified by reading the relevant audit specification/report files one at a time.
 
 ## Current BeyondAtoms primary paired-result files
 
@@ -59,7 +59,19 @@ These are on the remote working tree, outside the nine ZIP packages. They are th
 - `/root/data/beyondatoms-carve/experiments/original_shortcut_audit/OOF_PREDICTIONS.csv`
 - `/root/data/beyondatoms-carve/experiments/original_shortcut_audit/audit_summary.json`
 
-The working tree's `experiments/original_shortcut_audit` is the source for `pooled_strict_lr` in the current draft; the archive's `beyondatoms_lr_recovered/predictions_per_sample_precomputed.csv` is a separate protocol and estimand.
+The working tree's `experiments/original_shortcut_audit` is the source for `pooled_strict_lr` in the current draft; the archive's `beyondatoms_lr_recovered/predictions_per_sample_precomputed.csv` is a separate protocol and estimand. The strategy-selection input audit explicitly says the archived bundle lacks same-version per-example pooled-LR predictions aligned to current CARVE. Thus the working-tree files above, rather than that ZIP, are required to substantiate the current paired table; their provenance must stay separate from the earlier archive rows.
+
+## Official BeyondAtoms code snapshot
+
+The master ZIP includes the fixed BeyondAtoms source snapshot. These exact source files were located and read individually:
+
+- `beyondatoms/scripts/run_carve.py` — CLI entry point; imports `Executor` from `pipeline`.
+- `beyondatoms/pipeline.py` — defines `Executor` and imports the implementation modules below.
+- `beyondatoms/modules/relation_extraction.py` — relation extraction and connective family/symmetry/inverse utilities.
+- `beyondatoms/modules/verification.py` — downstream source/claim verification module.
+- `beyondatoms/util/util.py` — shared utility dependency imported by the CLI and pipeline.
+
+The manuscript's specific claim about the `direction` field in a match record is not mapped to one of these source files yet. The queried `relation_extraction.py` contains connective handling but does not define that field. The matching implementation and Stage A patch/replay files remain an open file-location item.
 
 All nine package names from the guide were confirmed as entries in the master index. The exact paths shown in the table were matched to index rows; hashes remain unchecked until `SHA256SUMS.txt` is read.
 
