@@ -1,6 +1,6 @@
 # Paper-to-archive file map
 
-This map was assembled from the supplied `E:\main.tex` and `E:\ACL2027_ARCHIVE_GUIDE_ZH.docx`. It identifies the concrete archive packages and named entry files that correspond to the manuscript. The complete `FILE_INDEX.csv` and `SHA256SUMS.txt` are inside the remote master archive and have not yet been read here; therefore package-internal completeness is not certified.
+This map was assembled from the supplied `E:\main.tex`, `E:\references.bib`, `E:\main.pdf`, and `E:\ACL2027_ARCHIVE_GUIDE_ZH.docx`, then checked against named entries in the master archive's `FILE_INDEX.csv`. It identifies the concrete archive packages and files that correspond to the manuscript. `SHA256SUMS.txt` has not been checked, and the 371-row index has not been exhaustively reconciled, so this is a research-file map rather than a complete package inventory.
 
 ## Manuscript source files
 
@@ -14,12 +14,12 @@ This map was assembled from the supplied `E:\main.tex` and `E:\ACL2027_ARCHIVE_G
 
 ## The nine experiment packages and manuscript correspondence
 
-| Package ZIP | Named files to retrieve | Manuscript sections / claims supported |
+| Package ZIP | Confirmed archive member paths | Manuscript sections / claims supported |
 |---|---|---|
 | `beyondatoms_lr_recovered.zip` | `beyondatoms_lr_recovered/RESEARCH_NOTE.md`; `beyondatoms_lr_recovered/predictions_per_sample_precomputed.csv` | Historical Claim-only LR exploratory baselines. The guide warns these predictions use an Evidence-grouping protocol and are not the current `main.pdf` pooled-LR/CARVE comparison. Keep separate from the later `original_shortcut_audit` OOF files. |
 | `ba_dataset_first_audit.zip` | `DATASET_FIRST_THEORY_AUDIT.md`; `pair_stats.json` | Four operation construction, text features, fixed evidence pairing, and theory correspondence. Relates to §RQ1 and appendix deduplication/pair units. |
 | `GRACE_AUDIT.zip` | `grace_audit/manifest.json`; `grace_audit/02_GRACE_TRAIN_TEST_RESULTS.md`; `grace_audit/results/judge_predictions.csv`; `grace_audit/results/predictions.csv.gz` | Cross-task evidence cited in Related Work and the study-level synthesis. Preserve the distinction between official test predictions, auxiliary NLI masking, and step-only TF-IDF. |
-| `VITAMINC_AUDIT.zip` | `vitaminc_audit/manifest.json`; `vitaminc_audit/03_NATIVE_CONTRASTIVE_RESULTS.md`; `vitaminc_audit/results/neural_rectangles.csv`; `vitaminc_audit/results/pairs.csv.gz`; `vitaminc_audit/results/rectangles.csv.gz`; `vitaminc_audit/results/rows.csv.gz`; `vitaminc_audit/results/albert_predictions.csv.gz`; `vitaminc_audit/results/linear_predictions.csv.gz`; `vitaminc_audit/results/nli_predictions.csv.gz`; `vitaminc_audit/results/real_transfer_predictions.csv.gz`; `vitaminc_audit/results/synthetic_transfer_predictions.csv.gz` | Contrastive evidence-reliance comparison discussed in Related Work and exploratory appendix. `neural_rectangles.csv` defines the common 128-group frozen-prediction comparison. |
+| `VITAMINC_AUDIT.zip` | `vitaminc_audit/manifest.json`; `vitaminc_audit/03_NATIVE_CONTRASTIVE_RESULTS.md`; `vitaminc_audit/results/neural_rectangles.csv`; `vitaminc_audit/results/paired_prediction_matrix.csv.gz`; `vitaminc_audit/results/pairs.csv.gz`; `vitaminc_audit/results/rectangles.csv.gz`; `vitaminc_audit/results/rows.csv.gz`; `vitaminc_audit/results/albert_predictions.csv.gz`; `vitaminc_audit/results/linear_predictions.csv.gz`; `vitaminc_audit/results/nli_predictions.csv.gz`; `vitaminc_audit/results/real_transfer_predictions.csv.gz`; `vitaminc_audit/results/synthetic_transfer_predictions.csv.gz` | Contrastive evidence-reliance comparison discussed in Related Work and exploratory appendix. `neural_rectangles.csv` defines the common 128-group frozen-prediction comparison. |
 | `VITAMINC_RESIDUAL_AUDIT.zip` | `residual_audit/manifest.json`; `residual_audit/03_ALBERT_RESIDUAL_ANALYSIS.md`; `residual_audit/results/predictions.csv.gz`; `residual_audit/results/quartet_success.csv.gz`; `residual_audit/results/sample_success.csv` | Residual and strategy-selection evidence; distinguishes full 11,127 quartets from common 128 groups. |
 | `ACL2027_RESEARCH_SYNTHESIS.zip` | `acl_synthesis/EXECUTIVE_SUMMARY_ZH.md`; `acl_synthesis/03_CLAIM_LEVEL_NOVELTY_MATRIX.md` | Cross-task synthesis, literature novelty, and paper framing. Check against the final strategy decision before carrying over claims. |
 | `ACL2027_CONSTRUCTION_AUDIT.zip` | `construction_audit/EXECUTIVE_SUMMARY_ZH.md`; `construction_audit/04_STRUCTURAL_IDENTIFIABILITY.md`; `construction_audit/07_RESEARCH_DIRECTION_COMPARISON.md`; `construction_audit/results/construction_profiles.json`; `construction_audit/results/structural_rows.csv.gz`; `construction_audit/results/input_manifest.json`; `construction_audit/results/behavior_replay/audit.json`; `construction_audit/results/behavior_replay/common_metrics.csv`; `construction_audit/results/behavior_replay/input_hashes.json` | Construction profiles, one-sided oracle, graph certificate, concentration, behavior replay, and cross-task assumptions. |
@@ -28,7 +28,7 @@ This map was assembled from the supplied `E:\main.tex` and `E:\ACL2027_ARCHIVE_G
 
 ## Exact rows/cases named in `main.tex`
 
-The manuscript names these cases, which must be located in the archived casebook or saved intermediate-state tables before reproducing the narrative:
+The manuscript names these case IDs; the exact case-level evidence rows and intervention specification files must be located before reproducing the narrative:
 
 - End-to-end intervention: `re-anchoring_140`, `re-anchoring_265`.
 - Repair bypass: `substitution_260`, `re-anchoring_262`.
@@ -36,7 +36,7 @@ The manuscript names these cases, which must be located in the archived casebook
 - Temporal audit: `substitution_209`, `substitution_225`, plus suffixes `_264`, `_267`, `_336`, `_215` in the relevant operation/component tables.
 - Cross-system source screen: fixed-commit sources for FDSpotter, VeriFact, and FactReasoner, as identified by `REPO_VERSIONS.json` and the cross-system screen records.
 
-These are case IDs, not literal filesystem paths. Their exact member filenames still need to be taken from `FILE_INDEX.csv` and the matching package casebook.
+These are case IDs, not literal filesystem paths. The four operation datasets below are located, but the index does not identify which member stores the saved intervention roster, patch values, replay outputs, or source excerpts.
 
 ## Master-archive locator files
 
@@ -61,5 +61,12 @@ These are on the remote working tree, outside the nine ZIP packages. They are th
 
 The working tree's `experiments/original_shortcut_audit` is the source for `pooled_strict_lr` in the current draft; the archive's `beyondatoms_lr_recovered/predictions_per_sample_precomputed.csv` is a separate protocol and estimand.
 
-The supplied guide names nine packages. No additional archive members are inferred beyond the listed names. The exact internal paths, hashes, and all casebook filenames remain unverified until the index is retrieved.
+All nine package names from the guide were confirmed as entries in the master index. The exact paths shown in the table were matched to index rows; hashes remain unchecked until `SHA256SUMS.txt` is read.
+
+The master index confirms the four operation data files that underlie the case IDs in the manuscript:
+
+- `beyondatoms/datasets/beyondatoms/injection_dataset.json`
+- `beyondatoms/datasets/beyondatoms/omission_dataset.json`
+- `beyondatoms/datasets/beyondatoms/re-anchoring_dataset.json`
+- `beyondatoms/datasets/beyondatoms/substitution_dataset.json`
 
