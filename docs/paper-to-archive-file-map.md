@@ -8,7 +8,9 @@ This map was assembled from the supplied `E:\main.tex`, `E:\references.bib`, `E:
 |---|---|---|
 | `E:\main.tex` | Found, 53,747 bytes | ACL-compatible paper source; includes the main claims and appendix. |
 | `E:\references.bib` | Found, 10,503 bytes | The bibliography explicitly loaded by `\bibliography{references}`. |
-| `E:\main.pdf` | Found, 242,657 bytes | Rendered paper PDF; also named by the archive guide. |
+| `E:\main.pdf` | Found, 242,657 bytes | Rendered paper PDF; SHA-256 matches the archive's `main.pdf` entry. |
+
+Local file SHA-256: `main.tex` `1c56730dc312b71f35bb0f42cbb57ad7fa9985f2c777cc12a8fe251280cd27c6`; `references.bib` `2300d85032a0412e4574949b9b7ac6be21762db22257649e36aeab86a7dc59fb`; `main.pdf` `94be43407f2f0e1c15fe6c7568fdf9f7e47bd1200931720bf989e8bb88925ba3`.
 
 `main.tex` has no `\input`, `\include`, or `\includegraphics` dependencies. Its only explicit external TeX dependency is `references.bib` (besides the ACL style and LaTeX packages supplied by the build environment).
 
@@ -73,7 +75,32 @@ The master ZIP includes the fixed BeyondAtoms source snapshot. These exact sourc
 
 The manuscript's specific claim about the `direction` field in a match record is not mapped to one of these source files yet. The queried `relation_extraction.py` contains connective handling but does not define that field. The matching implementation and Stage A patch/replay files remain an open file-location item.
 
-All nine package names from the guide were confirmed as entries in the master index. The exact paths shown in the table were matched to index rows; hashes remain unchecked until `SHA256SUMS.txt` is read.
+All nine package names from the guide were confirmed as entries in the master index. The exact paths shown in the table were matched to index rows. The following SHA-256 values were read from the single `SHA256SUMS.txt` member:
+
+| Package ZIP | SHA-256 |
+|---|---|
+| `beyondatoms_lr_recovered.zip` | `c6c19ced687bfac9b261dca584e7f6ef8dac37a09820c8333cc65540c258527a` |
+| `ba_dataset_first_audit.zip` | `50ecc6a0cadab33b73890159a0bfd740dfa3e49b43bed16c54e4c0f0a2e4be38` |
+| `GRACE_AUDIT.zip` | `5543d4dae9434c93a1647970e732d5e34ad4b09a7bfbb05a762e4ce24299e943` |
+| `VITAMINC_AUDIT.zip` | `18793908e5b5dd5a45b5220c8376ec0534b47b8f5af70e9ca5267c1fa2ab9213` |
+| `VITAMINC_RESIDUAL_AUDIT.zip` | `dbf92c1b493eb49a946bbb286e9cc67003cf4ad8fe46ab14d8d423329c71307b` |
+| `ACL2027_RESEARCH_SYNTHESIS.zip` | `772754265b80f7b0b2be390192e75051a574448100f52100ab92cef219471a45` |
+| `ACL2027_CONSTRUCTION_AUDIT.zip` | `a3ecc1516aee43fdb81e2ca9274dd7cbb5af0f663ffb45a6df80224df7a27ccb` |
+| `ACL2027_INTERACTION_AUDIT.zip` | `babe03633ca9002fdfffea01a91b80c9556ce978acd70b023c14937673899495` |
+| `ACL2027_STRATEGY_SELECTION_AUDIT.zip` | `219314a070705d69a5d82ef22600859bd97514c5621adc8c6d4b69c1c96b3f7f` |
+
+`FILE_INDEX.csv` SHA-256: `5b57e3764cc7fc9ab6a1b96809e04405b0c3fa9e73ad1defc3360e2eff84deac`. `REPO_VERSIONS.json` SHA-256: `84c1046738f18b8d1994f5eb0778413f2c1c82ca157d1b370bbdf529318670df`. The archived `main.pdf` SHA-256 `94be43407f2f0e1c15fe6c7568fdf9f7e47bd1200931720bf989e8bb88925ba3` matches local `E:\main.pdf` byte-for-byte.
+
+## Fixed upstream source snapshots
+
+`REPO_VERSIONS.json` records these four upstream code snapshots. These are reference sources, not the user's uploaded research repo:
+
+| Snapshot | Origin | Commit |
+|---|---|---|
+| BeyondAtoms | `https://github.com/lzy248/beyondatoms.git` | `172dced0a1e98a8544101ecd48754bb7bd8c4659` |
+| GRACE-benchmark | `https://github.com/pvhoang14/GRACE-benchmark.git` | `63b6b2d57839bf4a44e9f74572b2f8c5898e3f39` |
+| VitaminC | `https://github.com/TalSchuster/VitaminC.git` | `eb532922b88b199df68ed26afeb58dca5501b52f` |
+| Benchmark-Profiling | `https://github.com/junkim100/Benchmark-Profiling.git` | `bf2bc43b1fb1f19bf3496f1d9180812e9da78e81` |
 
 The master index confirms the four operation data files that underlie the case IDs in the manuscript:
 
